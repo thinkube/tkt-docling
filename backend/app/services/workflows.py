@@ -10,6 +10,7 @@ A standard step also receives the Docling models by key. While they are not
 yet in storage, the workflow first runs `python -m converter.models`, which
 downloads them into that key.
 """
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -45,6 +46,12 @@ STEP_RESOURCES = {
 WORK_DIR = "/tmp/conversion"
 MODELS_DIR = "/opt/docling-models"
 PREPARE_RESOURCES = Resources(cpu_request="250m", cpu_limit=1, memory_request="512Mi", memory_limit="1Gi")
+# Argo's wait container uploads the step's outputs within the executor limit
+# the workflow controller sets for every step (256Mi on Thinkube), which the
+# upload of a 200 MB model file exceeds. The prepare step raises it for itself.
+PREPARE_WAIT_PATCH = json.dumps(
+    {"containers": [{"name": "wait", "resources": {"requests": {"memory": "256Mi"}, "limits": {"memory": "1Gi"}}}]}
+)
 
 
 @dataclass
@@ -119,6 +126,7 @@ def build_workflow(conversion_id: str, pipeline: str, formats: list[str], prepar
                 command=["python", "-m", "converter.models"],
                 args=["--output", "/tmp/models", "--marker", f"/tmp/ready/{READY_MARKER}"],
                 resources=PREPARE_RESOURCES,
+                pod_spec_patch=PREPARE_WAIT_PATCH,
                 # Artifacts are uploaded in this order: the marker only after the models.
                 outputs=[
                     S3Artifact(

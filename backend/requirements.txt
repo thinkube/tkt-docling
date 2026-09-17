@@ -3,6 +3,9 @@
 # only the image installs.
 docling-core==2.97.0
 lxml==6.1.3
-# docling-core needs these newer than python-base carries.
+# Docling needs these newer than python-base carries. pydantic 2.11, the base
+# image's, fails Docling's pipeline-options hash with "Circular reference
+# detected".
+pydantic==2.13.5
 pydantic-settings==2.15.0
 requests==2.34.2

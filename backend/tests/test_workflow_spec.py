@@ -1,4 +1,5 @@
 """The workflow a conversion submits: steps in the backend image, artifacts by key."""
+import json
 import re
 from pathlib import Path
 
@@ -54,6 +55,9 @@ def test_models_are_prepared_first_when_missing():
     models, ready = prepare["outputs"]["artifacts"]
     assert models["s3"] == {"key": f"docling-test/docling-models/{DOCLING_VERSION}"}
     assert ready["s3"] == {"key": f"docling-test/docling-models/{DOCLING_VERSION}/READY"}
+    patch = json.loads(prepare["podSpecPatch"])
+    assert patch["containers"][0]["name"] == "wait"
+    assert patch["containers"][0]["resources"]["limits"]["memory"] == "1Gi"
 
 
 def test_granite_step_gets_gateway_and_token_and_no_models():
