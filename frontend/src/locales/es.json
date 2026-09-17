@@ -1,0 +1,171 @@
+{
+  "app": {
+    "title": "Docling"
+  },
+  "nav": {
+    "workspace": "Espacio de trabajo",
+    "home": "Conversiones",
+    "settings": "Configuracion",
+    "apiTokens": "Tokens API",
+    "account": "Cuenta",
+    "logout": "Cerrar sesion"
+  },
+  "conversions": {
+    "title": "Conversiones de PDF",
+    "subtitle": "Convierte PDF en Markdown, HTML, texto, JSON de Docling, DocTags o JATS XML",
+    "newTitle": "Nueva conversión",
+    "newSubtitle": "Un PDF, de hasta {{mb}} MB. Se convierte en un paso de workflow; esta página lo sigue.",
+    "pdf": "PDF",
+    "tooLarge": "El archivo supera los {{mb}} MB.",
+    "pipeline": "Pipeline",
+    "formats": "Formatos de salida",
+    "convert": "Convertir",
+    "started": "Convirtiendo {{name}}",
+    "startFailed": "No se pudo iniciar la conversión",
+    "optionsFailed": "No se pudieron cargar las opciones de conversión",
+    "loadFailed": "No se pudieron cargar las conversiones",
+    "listTitle": "Tus conversiones",
+    "empty": "Aún no hay conversiones. Sube un PDF arriba.",
+    "pagesIn": "{{pages}} páginas en {{seconds}} s",
+    "logs": "Workflow y registros",
+    "deleted": "Conversión eliminada",
+    "deleteFailed": "No se pudo eliminar la conversión",
+    "confirmDeleteTitle": "Eliminar conversión",
+    "confirmDelete": "¿Eliminar {{name}}, su PDF y sus salidas?",
+    "download": "Descargar",
+    "downloadFailed": "La descarga falló",
+    "previewDescription": "La salida tal como la escribió la conversión.",
+    "previewFailed": "No se pudo cargar la salida.",
+    "table": {
+      "file": "Archivo",
+      "pipeline": "Pipeline",
+      "status": "Estado",
+      "outputs": "Salidas"
+    },
+    "status": {
+      "queued": "En cola",
+      "running": "En curso",
+      "succeeded": "Hecha",
+      "failed": "Fallida"
+    },
+    "pipelines": {
+      "standard": "Estándar",
+      "granite-docling": "Granite-Docling"
+    },
+    "formatNames": {
+      "markdown": "Markdown",
+      "html": "HTML",
+      "text": "Texto",
+      "json": "JSON de Docling",
+      "doctags": "DocTags",
+      "jats": "JATS XML"
+    }
+  },
+  "apiTokens": {
+    "title": "Tokens API",
+    "subtitle": "Los tokens permiten que scripts y herramientas llamen a la API de esta aplicacion en tu nombre",
+    "createToken": {
+      "title": "Crear nuevo token",
+      "nameLabel": "Nombre del token",
+      "namePlaceholder": "Mi token API",
+      "expiresLabel": "Expira en (dias)",
+      "expiresPlaceholder": "Dejar vacio para sin expiracion",
+      "createButton": "Crear token"
+    },
+    "tokenCreated": {
+      "title": "Token creado con exito!",
+      "message": "Copia este token ahora. No podras verlo de nuevo.",
+      "copyButton": "Copiar al portapapeles",
+      "copied": "Token copiado al portapapeles!"
+    },
+    "tokenList": {
+      "title": "Tus tokens",
+      "noTokens": "No hay tokens API todavia. Crea uno arriba!",
+      "table": {
+        "name": "Nombre",
+        "created": "Creado",
+        "expires": "Expira",
+        "lastUsed": "Ultimo uso",
+        "actions": "Acciones",
+        "never": "Nunca",
+        "revoke": "Revocar",
+        "revoked": "Revocado"
+      },
+      "confirmRevoke": "Estas seguro de que quieres revocar este token?",
+      "confirmRevokeTitle": "Revocar token"
+    },
+    "usage": {
+      "title": "Como usar los tokens API",
+      "cli": {
+        "title": "CLI / curl",
+        "description": "Incluye el token en el encabezado Authorization:"
+      },
+      "env": {
+        "title": "Variable de entorno",
+        "description": "Define el token una vez y deja que tus herramientas lo lean:"
+      }
+    },
+    "errors": {
+      "createFailed": "Error al crear el token",
+      "revokeFailed": "Error al revocar el token",
+      "loadFailed": "Error al cargar los tokens",
+      "nameMissing": "Por favor proporciona un nombre para el token"
+    },
+    "success": {
+      "created": "Token creado",
+      "revoked": "Token revocado"
+    }
+  },
+  "profile": {
+    "roles": "Roles"
+  },
+  "theme": {
+    "toggle": "Cambiar tema"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "auth": {
+    "loginTitle": "Iniciar Sesion",
+    "loginMessage": "Por favor inicia sesion para acceder a la aplicacion",
+    "loginButton": "Iniciar sesion con Keycloak",
+    "loggingIn": "Completando autenticacion...",
+    "loginSuccess": "Autenticacion exitosa. Redirigiendo...",
+    "loginFailed": "Error de autenticacion",
+    "noCode": "No se recibio codigo de autorizacion",
+    "redirecting": "Redirigiendo al inicio de sesion...",
+    "redirectingMessage": "Por favor espera mientras te redirigimos a Keycloak.",
+    "configError": "Error de configuracion de autenticacion. Por favor revisa la consola para mas detalles.",
+    "tryAgain": "Reintentar"
+  },
+  "errors": {
+    "notFound": {
+      "title": "404",
+      "heading": "Pagina no encontrada",
+      "message": "La pagina que buscas no existe o ha sido movida.",
+      "backButton": "Volver al inicio"
+    },
+    "loadingApp": {
+      "title": "Error al cargar la aplicacion",
+      "message": "No se pudo cargar la informacion del usuario.",
+      "reload": "Recargar"
+    },
+    "general": {
+      "loading": "Cargando..."
+    }
+  },
+  "common": {
+    "open": "Abrir",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "back": "Atras",
+    "next": "Siguiente",
+    "yes": "Si",
+    "no": "No"
+  }
+}

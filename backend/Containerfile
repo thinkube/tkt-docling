@@ -1,0 +1,35 @@
+ARG CONTAINER_REGISTRY
+FROM ${CONTAINER_REGISTRY}/library/python-base:3.12-slim
+
+WORKDIR /app
+
+# Web API packages beyond the base image
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Docling for the conversion step, with torch built for CPU
+COPY requirements-converter.txt .
+RUN pip install --no-cache-dir \
+        --extra-index-url https://download.pytorch.org/whl/cpu \
+        -r requirements-converter.txt
+
+# The layout and table models, in the image: a step converts offline and
+# starts without a download.
+RUN docling-tools models download -o /opt/docling-models layout tableformer
+ENV DOCLING_ARTIFACTS_PATH=/opt/docling-models \
+    HF_HUB_OFFLINE=1
+
+COPY app /app/app
+COPY converter /app/converter
+COPY alembic /app/alembic
+COPY alembic.ini /app/alembic.ini
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+ENV PYTHONPATH=/app
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8000
+
+CMD ["/app/start.sh"]

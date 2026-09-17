@@ -1,0 +1,16 @@
+apiVersion: thinkube.io/v1
+kind: TemplateManifest
+metadata:
+  name: tkt-docling
+  title: Docling PDF Conversion
+  description: Converts PDFs such as scientific and medical papers into Markdown, HTML, text, Docling JSON, DocTags and JATS XML. Each conversion runs as an Argo workflow step, on CPU with Docling's models or through Granite-Docling on the LLM Gateway. React upload page, REST API with API tokens, PostgreSQL history.
+  version: 1.0.0
+  author: Alejandro Martínez Corriá
+  tags: ["docling", "pdf", "jats", "document-conversion", "workflows", "llm-gateway", "fastapi", "react"]
+
+parameters: []
+
+secrets:
+  - name: THINKUBE_API_TOKEN
+    description: A thinkube-control API token, for the granite-docling pipeline to call the LLM Gateway. Without it only the standard pipeline is offered.
+    required: false

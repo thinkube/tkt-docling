@@ -1,0 +1,171 @@
+{
+  "app": {
+    "title": "Docling"
+  },
+  "nav": {
+    "workspace": "Espai de treball",
+    "home": "Conversions",
+    "settings": "Configuracio",
+    "apiTokens": "Tokens API",
+    "account": "Compte",
+    "logout": "Tancar sessio"
+  },
+  "conversions": {
+    "title": "Conversions de PDF",
+    "subtitle": "Converteix PDF en Markdown, HTML, text, JSON de Docling, DocTags o JATS XML",
+    "newTitle": "Nova conversió",
+    "newSubtitle": "Un PDF, de fins a {{mb}} MB. Es converteix en un pas de workflow; aquesta pàgina el segueix.",
+    "pdf": "PDF",
+    "tooLarge": "El fitxer supera els {{mb}} MB.",
+    "pipeline": "Pipeline",
+    "formats": "Formats de sortida",
+    "convert": "Converteix",
+    "started": "S'està convertint {{name}}",
+    "startFailed": "No s'ha pogut iniciar la conversió",
+    "optionsFailed": "No s'han pogut carregar les opcions de conversió",
+    "loadFailed": "No s'han pogut carregar les conversions",
+    "listTitle": "Les teves conversions",
+    "empty": "Encara no hi ha conversions. Puja un PDF a dalt.",
+    "pagesIn": "{{pages}} pàgines en {{seconds}} s",
+    "logs": "Workflow i registres",
+    "deleted": "Conversió eliminada",
+    "deleteFailed": "No s'ha pogut eliminar la conversió",
+    "confirmDeleteTitle": "Elimina la conversió",
+    "confirmDelete": "Vols eliminar {{name}}, el seu PDF i les seves sortides?",
+    "download": "Descarrega",
+    "downloadFailed": "La descàrrega ha fallat",
+    "previewDescription": "La sortida tal com l'ha escrita la conversió.",
+    "previewFailed": "No s'ha pogut carregar la sortida.",
+    "table": {
+      "file": "Fitxer",
+      "pipeline": "Pipeline",
+      "status": "Estat",
+      "outputs": "Sortides"
+    },
+    "status": {
+      "queued": "En cua",
+      "running": "En curs",
+      "succeeded": "Feta",
+      "failed": "Fallida"
+    },
+    "pipelines": {
+      "standard": "Estàndard",
+      "granite-docling": "Granite-Docling"
+    },
+    "formatNames": {
+      "markdown": "Markdown",
+      "html": "HTML",
+      "text": "Text",
+      "json": "JSON de Docling",
+      "doctags": "DocTags",
+      "jats": "JATS XML"
+    }
+  },
+  "apiTokens": {
+    "title": "Tokens API",
+    "subtitle": "Els tokens permeten que scripts i eines cridin l'API d'aquesta aplicacio en nom teu",
+    "createToken": {
+      "title": "Crear nou token",
+      "nameLabel": "Nom del token",
+      "namePlaceholder": "El meu token API",
+      "expiresLabel": "Expira en (dies)",
+      "expiresPlaceholder": "Deixar buit per sense expiracio",
+      "createButton": "Crear token"
+    },
+    "tokenCreated": {
+      "title": "Token creat amb exit!",
+      "message": "Copia aquest token ara. No podras veure'l de nou.",
+      "copyButton": "Copiar al porta-retalls",
+      "copied": "Token copiat al porta-retalls!"
+    },
+    "tokenList": {
+      "title": "Els teus tokens",
+      "noTokens": "No hi ha tokens API encara. Crea'n un a dalt!",
+      "table": {
+        "name": "Nom",
+        "created": "Creat",
+        "expires": "Expira",
+        "lastUsed": "Ultim us",
+        "actions": "Accions",
+        "never": "Mai",
+        "revoke": "Revocar",
+        "revoked": "Revocat"
+      },
+      "confirmRevoke": "Estas segur que vols revocar aquest token?",
+      "confirmRevokeTitle": "Revocar token"
+    },
+    "usage": {
+      "title": "Com utilitzar els tokens API",
+      "cli": {
+        "title": "CLI / curl",
+        "description": "Inclou el token a la capcalera Authorization:"
+      },
+      "env": {
+        "title": "Variable d'entorn",
+        "description": "Defineix el token una vegada i deixa que les teves eines el llegeixin:"
+      }
+    },
+    "errors": {
+      "createFailed": "Error al crear el token",
+      "revokeFailed": "Error al revocar el token",
+      "loadFailed": "Error en carregar els tokens",
+      "nameMissing": "Si us plau proporciona un nom per al token"
+    },
+    "success": {
+      "created": "Token creat",
+      "revoked": "Token revocat"
+    }
+  },
+  "profile": {
+    "roles": "Rols"
+  },
+  "theme": {
+    "toggle": "Canviar tema"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "auth": {
+    "loginTitle": "Iniciar Sessio",
+    "loginMessage": "Si us plau inicia sessio per accedir a l'aplicacio",
+    "loginButton": "Iniciar sessio amb Keycloak",
+    "loggingIn": "Completant autenticacio...",
+    "loginSuccess": "Autenticacio exitosa. Redirigint...",
+    "loginFailed": "Error d'autenticacio",
+    "noCode": "No s'ha rebut codi d'autoritzacio",
+    "redirecting": "Redirigint a l'inici de sessio...",
+    "redirectingMessage": "Si us plau espera mentre et redirigim a Keycloak.",
+    "configError": "Error de configuracio d'autenticacio. Si us plau revisa la consola per mes detalls.",
+    "tryAgain": "Tornar a provar"
+  },
+  "errors": {
+    "notFound": {
+      "title": "404",
+      "heading": "Pagina no trobada",
+      "message": "La pagina que cerques no existeix o ha estat moguda.",
+      "backButton": "Tornar a l'inici"
+    },
+    "loadingApp": {
+      "title": "Error al carregar l'aplicacio",
+      "message": "No s'ha pogut carregar la informacio de l'usuari.",
+      "reload": "Recarregar"
+    },
+    "general": {
+      "loading": "Carregant..."
+    }
+  },
+  "common": {
+    "open": "Obrir",
+    "close": "Tancar",
+    "save": "Desar",
+    "cancel": "Cancel-lar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "update": "Actualitzar",
+    "back": "Enrere",
+    "next": "Seguent",
+    "yes": "Si",
+    "no": "No"
+  }
+}

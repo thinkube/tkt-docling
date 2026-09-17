@@ -1,0 +1,8 @@
+# What the web API and the tests need beyond the python-base image. The
+# conversion step's heavier packages are in requirements-converter.txt, which
+# only the image installs.
+docling-core==2.97.0
+lxml==6.1.3
+# docling-core needs these newer than python-base carries.
+pydantic-settings==2.15.0
+requests==2.34.2

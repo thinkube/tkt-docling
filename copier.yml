@@ -1,0 +1,11 @@
+# What Copier leaves out of an application made from this template: Copier's
+# own defaults.
+_exclude:
+  - copier.yml
+  - copier.yaml
+  - ~*
+  - "*.py[co]"
+  - __pycache__
+  - .git
+  - .DS_Store
+  - .svn

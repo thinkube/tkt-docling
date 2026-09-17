@@ -1,0 +1,59 @@
+apiVersion: thinkube.io/v1
+kind: ThinkubeDeployment
+
+spec:
+  deployment:
+    type: app
+
+  containers:
+    - name: backend
+      build: ./backend
+      port: 8000
+      size: large
+      health: /health
+      # PDFs are uploaded through the API
+      capabilities:
+        - large-uploads
+      test:
+        enabled: true
+        image: "python-base:3.12-slim"
+        command: "./run_tests.sh"
+        one: "./run_tests.sh <file>"
+      migrations:
+        tool: alembic
+        auto: true
+
+    - name: frontend
+      build: ./frontend
+      port: 80
+      size: small
+      health: /health
+      publicEnv:
+        - APP_TITLE
+      test:
+        enabled: true
+        # node-base carries git, which npm needs to install thinkube-style
+        image: "node-base:22-alpine"
+        command: "./run_tests.sh"
+        one: "./run_tests.sh <file>"
+
+  routes:
+    - path: /api
+      to: backend
+    - path: /
+      to: frontend
+
+  services:
+    - database
+    # Each conversion runs as a workflow step in the backend image
+    - workflows
+
+  dependencies:
+    - name: llm-gateway
+      type: llm-proxy
+      env: LLM_GATEWAY_URL
+
+  env:
+    - name: GRANITE_DOCLING_MODEL
+      description: "The model the granite-docling pipeline calls through the LLM Gateway; it must be loaded there"
+      default: "ibm-granite/granite-docling-258M"

@@ -1,0 +1,3 @@
+# Docling and its models' runtime, for the conversion step. torch comes from
+# the CPU wheel index (see the Containerfile): the step runs no GPU code.
+docling==2.128.0
