@@ -43,7 +43,10 @@ def test_artifacts_are_keys_in_the_default_repository():
 
 def test_standard_step_is_offline_and_gets_no_secrets():
     container = template(spec_of("standard"), "convert")["container"]
-    assert container["env"] == [{"name": "HF_HUB_OFFLINE", "value": "1"}]
+    assert container["env"] == [
+        {"name": "DOCLING_ARTIFACTS_PATH", "value": "/opt/docling-models"},
+        {"name": "HF_HUB_OFFLINE", "value": "1"},
+    ]
     assert "envFrom" not in container
 
 

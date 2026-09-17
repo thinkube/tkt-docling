@@ -83,7 +83,7 @@ def build_workflow(conversion_id: str, pipeline: str, formats: list[str], prepar
     else:
         inputs.append(S3Artifact(name="models", path=MODELS_DIR, key=storage.models_key()))
         # The models come from the artifact; nothing is fetched from Hugging Face.
-        env = [Env(name="HF_HUB_OFFLINE", value="1")]
+        env = [Env(name="DOCLING_ARTIFACTS_PATH", value=MODELS_DIR), Env(name="HF_HUB_OFFLINE", value="1")]
 
     with Workflow(
         generate_name=f"{settings.APP_NAME}-convert-",

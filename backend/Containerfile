@@ -8,13 +8,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Docling for the conversion step, with torch built for CPU. Its models are
-# not in the image: steps receive them from Thinkube Storage
-# (converter/models.py) at DOCLING_ARTIFACTS_PATH.
+# not in the image: a standard step receives them from Thinkube Storage
+# (converter/models.py).
 COPY requirements-converter.txt .
 RUN pip install --no-cache-dir \
         --extra-index-url https://download.pytorch.org/whl/cpu \
         -r requirements-converter.txt
-ENV DOCLING_ARTIFACTS_PATH=/opt/docling-models
 
 COPY app /app/app
 COPY converter /app/converter
