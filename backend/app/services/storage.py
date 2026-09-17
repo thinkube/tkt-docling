@@ -6,6 +6,7 @@ with no credentials of its own:
 
     argo-artifacts/<app>/conversions/<id>/source.pdf
     argo-artifacts/<app>/conversions/<id>/outputs/<file>
+    argo-artifacts/<app>/docling-models/<docling version>/...
 """
 import json
 from functools import lru_cache
@@ -15,6 +16,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from app.core.config import settings
+from converter.models import DOCLING_VERSION, READY_MARKER
 
 # The bucket of the artifact repository the platform writes for
 # `services: [workflows]` (thinkube-control templates/k8s/workflows.j2).
@@ -42,6 +44,21 @@ def source_key(conversion_id: str) -> str:
 
 def outputs_key(conversion_id: str) -> str:
     return f"{conversion_prefix(conversion_id)}/outputs"
+
+
+def models_key() -> str:
+    return f"{settings.APP_NAME}/docling-models/{DOCLING_VERSION}"
+
+
+def models_ready() -> bool:
+    """Whether the models are in storage, complete: the READY marker is written last."""
+    try:
+        _client().head_object(Bucket=ARTIFACT_BUCKET, Key=f"{models_key()}/{READY_MARKER}")
+    except ClientError as e:
+        if e.response.get("Error", {}).get("Code") in ("NoSuchKey", "404", "NotFound"):
+            return False
+        raise
+    return True
 
 
 def put_source(conversion_id: str, data: bytes) -> None:

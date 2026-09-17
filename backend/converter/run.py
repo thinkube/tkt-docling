@@ -8,6 +8,9 @@ declares, and result.json with the page count, the time taken and Docling's
 status. Exits non-zero when the conversion fails, so the step fails with
 Docling's own message in its log.
 
+The standard pipeline reads its models from DOCLING_ARTIFACTS_PATH and
+stops when they are not there.
+
 The granite-docling pipeline reads three variables: LLM_GATEWAY_URL,
 THINKUBE_API_TOKEN and GRANITE_DOCLING_MODEL. A missing one stops the run
 before any page is sent.
@@ -31,6 +34,15 @@ def build_converter(pipeline: str, env=os.environ):
 
     if pipeline == "standard":
         from docling.datamodel.pipeline_options import PdfPipelineOptions
+
+        from converter.models import REQUIRED
+
+        artifacts = env.get("DOCLING_ARTIFACTS_PATH")
+        if not artifacts or not (Path(artifacts) / REQUIRED).is_dir():
+            raise SystemExit(
+                f"The standard pipeline reads its models from DOCLING_ARTIFACTS_PATH ({artifacts!r}), "
+                f"which has no {REQUIRED}. The workflow step receives them from Thinkube Storage."
+            )
 
         options = PdfPipelineOptions(do_ocr=False, do_table_structure=True)
         return DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)})

@@ -19,14 +19,14 @@ Upload a PDF, choose a pipeline and the output formats, and download the results
 
 | Pipeline | Where it runs |
 |---|---|
-| `standard` | Docling's layout and table models, on CPU in the conversion step. The models are in the image. |
+| `standard` | Docling's layout and table models, on CPU in the conversion step. The first standard conversion downloads the models once into Thinkube Storage. |
 | `granite-docling` | [Granite-Docling 258M](https://huggingface.co/ibm-granite/granite-docling-258M) through the LLM Gateway, one request per page. |
 
 ## How it fits together
 
 - **Web app template.** React on thinkube-style, FastAPI, PostgreSQL, sign-in through Thinkube Identity, API tokens.
 - **Argo Workflows** (`services: [workflows]`). Each conversion is one workflow step that runs `python -m converter.run` in the backend's own image.
-- **Thinkube Storage.** The PDF and the outputs are artifacts under `argo-artifacts/<app>/conversions/<id>/`. The step reads and writes them by key.
+- **Thinkube Storage.** The PDF and the outputs are artifacts under `argo-artifacts/<app>/conversions/<id>/`, and the Docling models under `argo-artifacts/<app>/docling-models/<version>/`. The step reads and writes them by key.
 - **LLM Gateway** (`dependencies: llm-proxy`). The granite-docling step calls the gateway with `THINKUBE_API_TOKEN` from the app's secrets.
 
 ## Before you deploy

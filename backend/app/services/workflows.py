@@ -1,10 +1,14 @@
 """Conversions as Argo workflows, in this application's own namespace.
 
-One workflow per conversion, one step: `python -m converter.run` in this
-application's backend image. The step reads the PDF from the artifact
-repository by key and writes the output directory back under another key, so
-it needs no storage credentials. The granite-docling step also reads
-THINKUBE_API_TOKEN from the application's Secret.
+One workflow per conversion: `python -m converter.run` in this application's
+backend image. The step reads the PDF from the artifact repository by key and
+writes the output directory back under another key, so it needs no storage
+credentials. The granite-docling step also reads THINKUBE_API_TOKEN from the
+application's Secret.
+
+A standard step also receives the Docling models by key. While they are not
+yet in storage, the workflow first runs `python -m converter.models`, which
+downloads them into that key.
 """
 from dataclasses import dataclass
 from pathlib import Path
@@ -18,6 +22,7 @@ from hera.workflows import (
     Resources,
     S3Artifact,
     SecretEnvFrom,
+    Steps,
     Workflow,
     WorkflowsService,
 )
@@ -25,6 +30,7 @@ from hera.workflows.models import TTLStrategy
 
 from app.core.config import settings
 from app.services import storage
+from converter.models import READY_MARKER
 
 SERVICE_ACCOUNT_TOKEN = Path("/var/run/secrets/kubernetes.io/serviceaccount/token")
 
@@ -37,6 +43,8 @@ STEP_RESOURCES = {
 }
 
 WORK_DIR = "/tmp/conversion"
+MODELS_DIR = "/opt/docling-models"
+PREPARE_RESOURCES = Resources(cpu_request="250m", cpu_limit=1, memory_request="512Mi", memory_limit="1Gi")
 
 
 @dataclass
@@ -54,19 +62,25 @@ def _service() -> WorkflowsService:
     )
 
 
-def build_workflow(conversion_id: str, pipeline: str, formats: list[str]) -> Workflow:
+def build_workflow(conversion_id: str, pipeline: str, formats: list[str], prepare_models: bool = False) -> Workflow:
+    """The conversion's workflow; with prepare_models, a first step puts the models in storage."""
     env = []
     env_from = []
+    inputs = [S3Artifact(name="source", path=f"{WORK_DIR}/source.pdf", key=storage.source_key(conversion_id))]
     if pipeline == "granite-docling":
         env = [
             Env(name="LLM_GATEWAY_URL", value=settings.LLM_GATEWAY_URL),
             Env(name="GRANITE_DOCLING_MODEL", value=settings.GRANITE_DOCLING_MODEL),
         ]
         env_from = [SecretEnvFrom(name=f"{settings.APP_NAME}-secrets")]
+    else:
+        inputs.append(S3Artifact(name="models", path=MODELS_DIR, key=storage.models_key()))
+        # The models come from the artifact; nothing is fetched from Hugging Face.
+        env = [Env(name="HF_HUB_OFFLINE", value="1")]
 
     with Workflow(
         generate_name=f"{settings.APP_NAME}-convert-",
-        entrypoint="convert",
+        entrypoint="conversion",
         namespace=settings.WORKFLOWS_NAMESPACE,
         service_account_name=settings.WORKFLOWS_SERVICE_ACCOUNT,
         image_pull_secrets=["app-pull-secret"],
@@ -75,7 +89,7 @@ def build_workflow(conversion_id: str, pipeline: str, formats: list[str]) -> Wor
         # stay in storage until the conversion is deleted.
         ttl_strategy=TTLStrategy(seconds_after_completion=86400),
     ) as workflow:
-        Container(
+        convert = Container(
             name="convert",
             image=settings.CONTAINER_IMAGE_BACKEND,
             command=["python", "-m", "converter.run"],
@@ -88,7 +102,7 @@ def build_workflow(conversion_id: str, pipeline: str, formats: list[str]) -> Wor
             env=env,
             env_from=env_from,
             resources=STEP_RESOURCES[pipeline],
-            inputs=[S3Artifact(name="source", path=f"{WORK_DIR}/source.pdf", key=storage.source_key(conversion_id))],
+            inputs=inputs,
             outputs=[
                 S3Artifact(
                     name="outputs",
@@ -98,12 +112,40 @@ def build_workflow(conversion_id: str, pipeline: str, formats: list[str]) -> Wor
                 )
             ],
         )
+        if prepare_models:
+            prepare = Container(
+                name="prepare-models",
+                image=settings.CONTAINER_IMAGE_BACKEND,
+                command=["python", "-m", "converter.models"],
+                args=["--output", "/tmp/models", "--marker", f"/tmp/ready/{READY_MARKER}"],
+                resources=PREPARE_RESOURCES,
+                # Artifacts are uploaded in this order: the marker only after the models.
+                outputs=[
+                    S3Artifact(
+                        name="models",
+                        path="/tmp/models",
+                        key=storage.models_key(),
+                        archive=NoneArchiveStrategy(),
+                    ),
+                    S3Artifact(
+                        name="ready",
+                        path=f"/tmp/ready/{READY_MARKER}",
+                        key=f"{storage.models_key()}/{READY_MARKER}",
+                        archive=NoneArchiveStrategy(),
+                    ),
+                ],
+            )
+        with Steps(name="conversion"):
+            if prepare_models:
+                prepare(name="prepare-models")
+            convert(name="convert")
     return workflow
 
 
 def submit(conversion_id: str, pipeline: str, formats: list[str]) -> str:
     """Submit the conversion's workflow and return its name."""
-    workflow = build_workflow(conversion_id, pipeline, formats)
+    prepare = pipeline == "standard" and not storage.models_ready()
+    workflow = build_workflow(conversion_id, pipeline, formats, prepare_models=prepare)
     workflow.workflows_service = _service()
     created = workflow.create()
     return created.metadata.name
