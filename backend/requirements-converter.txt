@@ -1,3 +1,6 @@
-# Docling and its models' runtime, for the conversion step. torch comes from
-# the CPU wheel index (see the Containerfile): the step runs no GPU code.
-docling==2.128.0
+# Docling for the conversion step: PDF input, the local layout and table
+# models, and docling-tools. OCR engines are left out; papers with a text
+# layer need none. torch comes from the CPU wheel index (see the
+# Containerfile): the step runs no GPU code.
+docling-slim[format-pdf,convert-core,models-local,cli]==2.128.0
+docling-ibm-models[opencv-python-headless]

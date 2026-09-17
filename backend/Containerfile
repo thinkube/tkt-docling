@@ -7,15 +7,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Docling for the conversion step, with torch built for CPU
+# Docling for the conversion step, with torch built for CPU, and the layout
+# and table models in the image, so a step converts offline and starts
+# without a download. One step, so the builder snapshots and pushes one
+# layer. The step uses the PyTorch layout model; its ONNX copy is removed.
 COPY requirements-converter.txt .
 RUN pip install --no-cache-dir \
         --extra-index-url https://download.pytorch.org/whl/cpu \
-        -r requirements-converter.txt
-
-# The layout and table models, in the image: a step converts offline and
-# starts without a download.
-RUN docling-tools models download -o /opt/docling-models layout tableformer
+        -r requirements-converter.txt \
+    && docling-tools models download -o /opt/docling-models layout tableformer \
+    && rm -rf /opt/docling-models/docling-project--docling-layout-heron-onnx
 ENV DOCLING_ARTIFACTS_PATH=/opt/docling-models \
     HF_HUB_OFFLINE=1
 
