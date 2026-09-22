@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """The PDFs and the conversion outputs, in Thinkube Storage.
 
 Both live in the bucket the namespace's Argo artifact repository uses, under

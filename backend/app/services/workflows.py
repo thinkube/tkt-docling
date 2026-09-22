@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """Conversions as Argo workflows, in this application's own namespace.
 
 One workflow per conversion: `python -m converter.run` in this application's

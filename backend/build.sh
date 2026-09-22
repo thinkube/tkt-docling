@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # build.sh - Build backend Docker image using Kaniko
 
 set -e

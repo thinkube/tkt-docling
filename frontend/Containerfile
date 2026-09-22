@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # Build stage - use optimized base from library
 ARG CONTAINER_REGISTRY
 # node-base carries git, which npm needs to install thinkube-style

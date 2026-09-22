@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 // Variables the deployment chose to show the browser.
 //
 // The platform sets them in the container from this container's publicEnv in

@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { TkButton } from 'thinkube-style/components/buttons-badges';

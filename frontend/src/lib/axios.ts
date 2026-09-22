@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getToken, storeTokens, clearTokens, getRefreshToken } from './tokenManager';
 

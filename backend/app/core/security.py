@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # app/core/security.py
 from typing import Dict, Optional, List
 import logging

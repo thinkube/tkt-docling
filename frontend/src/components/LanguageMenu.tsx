@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import { Languages } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { TkDropdownMenu } from 'thinkube-style/components/navigation';

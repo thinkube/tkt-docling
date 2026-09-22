@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import { describe, it, expect, afterEach } from 'vitest';
 import { publicValue } from '../publicConfig';
 

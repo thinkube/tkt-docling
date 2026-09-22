@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # app/core/api_tokens.py
 """API Token authentication for programmatic access."""
 

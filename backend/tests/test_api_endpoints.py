@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # tests/test_api_endpoints.py
 """Test API endpoints for the template application."""
 

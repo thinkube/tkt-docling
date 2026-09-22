@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """The conversions API, with storage and Argo Workflows replaced by doubles.
 
 What reaches storage and what is submitted to Argo is recorded, and the

@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # app/db/cicd_session.py
 """Database session management for CI/CD monitoring database."""
 

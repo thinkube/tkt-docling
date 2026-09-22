@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """A PDF conversion and the workflow that runs it."""
 import enum
 import uuid

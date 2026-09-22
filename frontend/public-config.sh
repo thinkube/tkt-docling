@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # Publish the variables named in PUBLIC_ENV_VARS to the browser.
 #
 # The bundle is built before the deployment exists, so the values it needs

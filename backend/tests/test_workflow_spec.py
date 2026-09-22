@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """The workflow a conversion submits: steps in the backend image, artifacts by key."""
 import json
 import re

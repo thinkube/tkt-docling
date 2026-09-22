@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """PDF conversions: upload, follow, download, delete.
 
 Every route takes a Thinkube Identity token or one of this application's API

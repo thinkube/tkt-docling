@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """The Docling models the standard pipeline reads, kept in Thinkube Storage.
 
 They are downloaded once, by a workflow step, into the application's prefix

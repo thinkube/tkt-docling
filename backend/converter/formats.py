@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """The output formats a conversion can produce.
 
 Each format is written from the same DoclingDocument. Five are Docling's own

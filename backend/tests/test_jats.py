@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """JATS output: valid against JATS Archiving 1.4, and each mapping rule holds.
 
 The two fixtures are the same open-access paper (PLOS ONE,

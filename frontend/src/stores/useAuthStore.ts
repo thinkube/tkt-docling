@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import { create } from 'zustand';
 import { getUserInfo, logout as authLogout, UserInfo } from '@/lib/auth';
 import { getToken, clearTokens } from '@/lib/tokenManager';

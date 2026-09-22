@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 // Token storage, kept separate from the axios instance to avoid a circular import.
 
 const TOKEN_KEY = 'access_token';

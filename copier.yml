@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # What Copier leaves out of an application made from this template: Copier's
 # own defaults.
 _exclude:

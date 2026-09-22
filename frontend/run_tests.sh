@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # run_tests.sh - Run the frontend tests.
 #
 #   ./run_tests.sh              the whole suite, with lint and coverage (CI)

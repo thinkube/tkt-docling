@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # app/api/router.py
 from fastapi import APIRouter
 from app.api import auth, conversions, tokens

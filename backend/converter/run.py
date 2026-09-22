@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """Convert one PDF: the command a conversion step runs.
 
     python -m converter.run --input source.pdf --output out/ \

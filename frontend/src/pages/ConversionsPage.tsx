@@ -1,3 +1,8 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useEffect, useState } from 'react';
 import { ExternalLink, Loader2, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

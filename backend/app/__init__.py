@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 # app/__init__.py
 from contextlib import asynccontextmanager
 from fastapi import FastAPI

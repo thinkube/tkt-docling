@@ -1,3 +1,6 @@
+# Copyright Alejandro Martínez Corriá and the Thinkube contributors
+# SPDX-License-Identifier: MIT
+
 """JATS XML from a DoclingDocument.
 
 Docling reads JATS but does not write it. This module maps the structure
