@@ -62,4 +62,4 @@ Limits of what a PDF gives:
 
 ## License
 
-Apache 2.0. Docling and Granite-Docling are MIT and Apache 2.0. The JATS schema under `backend/tests/schemas` is published by the U.S. National Library of Medicine and is in the public domain.
+MIT. Code generated from this template is yours: no attribution required, and you may license the app you build however you choose. See [LICENSE](LICENSE). Docling and Granite-Docling are MIT and Apache 2.0. The JATS schema under `backend/tests/schemas` is published by the U.S. National Library of Medicine and is in the public domain.
