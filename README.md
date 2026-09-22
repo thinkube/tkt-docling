@@ -31,7 +31,7 @@ It is not installed on its own.
 The walkthrough (load Granite-Docling, deploy, convert a paper on the page
 and through the API, compare the pipelines, check the JATS output, and the
 limits of what a PDF gives) is on the documentation site:
-[Convert papers to Markdown and JATS XML](https://github.com/thinkube/thinkube.org/blob/main/modules/ROOT/pages/playbooks/convert-papers-to-markdown-and-jats.adoc).
+[Convert papers to Markdown and JATS XML](https://thinkube.github.io/thinkube.org/thinkube-docs/playbooks/convert-papers-to-markdown-and-jats.html).
 
 ## How it fits together
 
