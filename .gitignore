@@ -67,3 +67,6 @@ install-hooks.sh
 prepare-for-github.sh
 reprocess-templates.sh
 .git-hooks/
+
+# Local Claude Code and Tandem state
+.claude/ .tandem/
