@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 # The version in requirements-converter.txt; tests/test_workflow_spec.py holds them equal.
-DOCLING_VERSION = "2.128.0"
+DOCLING_VERSION = "2.132.0"
 READY_MARKER = "READY"
 MODELS = ("layout", "tableformer")
 # The step runs the PyTorch layout model; the download also brings its ONNX copy.
